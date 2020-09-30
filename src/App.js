@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Header from './client/components/header';
+import GagList from './client/components/gagList';
+import {v4 as uuid} from 'uuid';
 
 function App() {
+  const [gags, setGags] = useState([{id:uuid(), text:"Meme", title:"FirstMeme", img:"./client/components/maxresdefault.jpg"}])
+
+  const [gag, setGag] = useState({
+    id: "",
+    text: "",
+    title: "",
+    img: ""
+})
+
+  const addTodo = (gag) =>{
+    setGags([gag, ...gags])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <GagList gags={gags}></GagList>
     </div>
   );
 }
