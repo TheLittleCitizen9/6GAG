@@ -3,7 +3,7 @@ import './headerDesign.css';
 
 function Header(props) {
     const getAllImagesFromServer = function(){
-        props.getImagesFromServer()
+        props.getAllImagesFromServer()
     }
     
 
