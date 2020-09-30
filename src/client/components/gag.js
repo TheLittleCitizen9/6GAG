@@ -2,7 +2,7 @@ import React from 'react';
 import './gagDesign.css'
 
 function GagItem(props) {
-  const png = require('./images/'+props.gag.img)
+  const png = props.gag.img
   
   const onOpen = () => {
       props.onOpen(png, props.gag)

@@ -1,10 +1,16 @@
 import React from 'react';
-import './headerDesign.css'
+import './headerDesign.css';
 
-function Header() {
+function Header(props) {
+    const getAllImagesFromServer = function(){
+        props.getImagesFromServer()
+    }
+    
+
   return (
     <div className="Header">
       <h1>6GAG</h1>
+      <button onClick={getAllImagesFromServer}>GetAllMemes</button>
     </div>
   );
 }
