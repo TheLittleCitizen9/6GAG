@@ -1,4 +1,14 @@
 .Header{
     font-weight: bolder;
     font-size: xx-large;
+    text-shadow: 0 0 15px rgb(63, 96, 97);
+}
+
+button{
+    width: max-content;
+    height: max-content;
+    margin-bottom: 10px;
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Calibri';
 }

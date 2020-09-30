@@ -3,6 +3,12 @@
 }
 
 body{
-  background-color: rgb(199, 212, 214);
+  background-color: rgb(202, 208, 209);
+  font-family: 'Calibri';
+}
+
+input{
+  font-size: large;
+  font-weight: bold;
   font-family: 'Calibri';
 }
