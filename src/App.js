@@ -22,7 +22,7 @@ function App() {
     newWindow.document.body.appendChild(<GagItem key={g.id} gag={g} pic={p} onOpen={onOpen}></GagItem>)
   }
 
-  const addTodo = (gag) =>{
+  const addGag = (gag) =>{
     setGags([gag, ...gags])
   }
 
