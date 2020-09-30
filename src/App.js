@@ -1,33 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './client/components/header';
 import GagList from './client/components/gagList';
 import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 import GagItem from './client/components/gag';
+import UploadFile from './client/components/uploadFile';
 
 function App() {
-  // const [gags, setGags] = useState([{id:uuid(), text:"Meme", title:"First Meme", img: 'maxresdefault.jpg'}, 
-  //                                 {id:uuid(), text:"Meme", title:"Second Meme", img: 'meme2.jpg'},
-  //                                 {id:uuid(), text:"Meme", title:"Third Meme", img: 'maxresdefault.jpg'}])
-
-  // const [gag, setGag] = useState({
-  //   id: "",
-  //   text: "Meme pic unavailable",
-  //   title: "",
-  //   img: ""
-  // })
 
   const [gags, setGags] = useState([])
 
-  const addGag = (gag) =>{
-    setGags([gag, ...gags])
-    console.log(gags)
-  }
-
   const getAllImagesFromServer = function() {axios.get('http://localhost:3001/getAll').then(res => {
+    var allGags = []
     for(var i=0; i<res.data.length; i++){
-      console.log(res.data[i])
       var title = res.data[i].split('/')
       var newGag = {
         id: uuid(),
@@ -35,11 +21,16 @@ function App() {
         title: title[title.length-1],
         img:res.data[i]
       }
-      console.log(newGag)
-      addGag(newGag)
+      allGags.push(newGag)
     }
-    console.log(gags)
+    setGags(allGags)
   })}
+
+  const uploadFile = (file) =>{
+    const fd = new FormData()
+    fd.append('profile', file, file.name)
+    axios.post('http://localhost:3001/upload', fd)
+  }
 
   const onOpen = (p, g) =>{
     var newWindow = window.open(p, "", "width=600,height=400,left=200,top=200")
@@ -49,6 +40,7 @@ function App() {
   return (
     <div className="App">
       <Header getAllImagesFromServer={getAllImagesFromServer}></Header>
+      <UploadFile uploadFile={uploadFile}></UploadFile>
       <GagList gags={gags} onOpen={onOpen}></GagList>
     </div>
   );
