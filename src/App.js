@@ -26,9 +26,10 @@ function App() {
     setGags(allGags)
   })}
 
-  const uploadFile = (file) =>{
+  const uploadFile = (file, name) =>{
     const fd = new FormData()
     fd.append('profile', file, file.name)
+    fd.append('name', name)
     axios.post('http://localhost:3001/upload', fd)
   }
 
