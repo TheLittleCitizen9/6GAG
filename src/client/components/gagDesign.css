@@ -10,6 +10,7 @@ p{
 
 .gagItem{
     border-radius: 25px;
-    border: 2px solid black;
+    border: 2px solid lightgrey;
     margin-top: 40px;
+    background-color: rgb(131, 125, 133);
 }

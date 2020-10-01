@@ -77,9 +77,6 @@ function App() {
         <div className="col-md-8">
           <GagList gags={gags} onOpen={onOpen} onLike={onLike} onDislike={onDislike}></GagList>    
         </div>
-        <div className="col-md-4">
-          
-        </div>
       </div>
       
     </div>
