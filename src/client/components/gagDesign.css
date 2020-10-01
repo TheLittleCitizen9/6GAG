@@ -1,0 +1,21 @@
+img{
+    width: 30%;
+    height: 30%;
+}
+
+p{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.gagItem{
+    border-radius: 25px;
+    border: 3px solid lightgrey;
+    margin-top: 40px;
+    background-color: rgb(131, 125, 133);
+}
+
+.votes{
+    font-size: x-large;
+    font-weight: bold;
+}

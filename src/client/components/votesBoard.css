@@ -1,0 +1,14 @@
+.MostLiked{
+    border-radius: 25px;
+    background-color: rgb(131, 125, 133);
+}
+
+.meme{
+    font-size: large;
+    margin-top: 10px;
+}
+
+h3{
+    font-size: x-large;
+    font-weight: bold;
+}
