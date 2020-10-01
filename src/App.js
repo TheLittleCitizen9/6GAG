@@ -19,7 +19,9 @@ function App() {
         id: uuid(),
         text: "Meme pic unavailable",
         title: title[title.length-1],
-        img:res.data[i]
+        img:res.data[i],
+        likes: 0,
+        dislikes:0
       }
       allGags.push(newGag)
     }
@@ -33,6 +35,31 @@ function App() {
     axios.post('http://localhost:3001/upload', fd)
   }
 
+  const onLike = (gag) => {
+    let newGags = [...gags]
+    gag.likes = gag.likes+1
+    console.log(typeof(newGags))
+    for(let i=0; i<newGags.length; i++){
+      if(gag.id === newGags[i].id){
+        newGags[i] = gag
+      }
+    }
+    
+    setGags(newGags)
+  }
+
+  const onDislike = (gag) => {
+    gag.likes = gag.likes-1
+    let newGags = [...gags]
+    for(let i=0; i<newGags.length; i++){
+      if(gag.id === newGags[i].id){
+        newGags[i] = gag
+      }
+    }
+    
+    setGags(newGags)
+  }
+
   const onOpen = (p, g) =>{
     var newWindow = window.open(p, "", "width=600,height=400,left=200,top=200")
     newWindow.document.body.innerHTML = <GagItem key={g.id} gag={g} pic={p} onOpen={onOpen}></GagItem>
@@ -42,7 +69,7 @@ function App() {
     <div className="App">
       <Header getAllImagesFromServer={getAllImagesFromServer}></Header>
       <UploadFile uploadFile={uploadFile}></UploadFile>
-      <GagList gags={gags} onOpen={onOpen}></GagList>
+      <GagList gags={gags} onOpen={onOpen} onLike={onLike} onDislike={onDislike}></GagList>
     </div>
   );
 }
