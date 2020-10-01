@@ -8,11 +8,13 @@ function GagItem(props) {
       props.onOpen(png, props.gag)
   }
 
-  const onLike = () => {
+  const onLike = (e) => {
+    e.target.disabled = true
     props.onLike(props.gag)
   }
 
-  const onDislike = () => {
+  const onDislike = (e) => {
+    e.target.disabled = true
     props.onDislike(props.gag)
   }
 
