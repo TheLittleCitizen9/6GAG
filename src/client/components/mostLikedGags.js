@@ -17,7 +17,7 @@ function MostLikedGags(props) {
         <h3>Most Liked Memes</h3>
         {getMostLikedGags()}
       {mostLikedGags.map(gag => (
-                    <div className="meme" key={gag.id}>{gag.title} - {gag.likes-gag.dislikes}</div>
+                    <div className="meme" key={gag.id}>{gag.title} - {gag.votes}</div>
                 ))}
     </div>
   );

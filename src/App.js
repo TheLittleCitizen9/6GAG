@@ -14,18 +14,17 @@ function App() {
 
   const getAllImagesFromServer = function() {axios.get('http://localhost:3001/getAll').then(res => {
     var allGags = []
-    for(var i=0; i<res.data.length; i++){
-      var title = res.data[i].split('/')
-      var newGag = {
-        id: uuid(),
-        text: "Meme pic unavailable",
-        title: title[title.length-1],
-        img:res.data[i],
-        likes: 0,
-        dislikes:0
+      for(var key in res.data){
+        var title = key.split('/')
+        var newGag = {
+          id: uuid(),
+          text: "Meme pic unavailable",
+          title: title[title.length-1],
+          img:key,
+          votes: res.data[key]
+        }
+        allGags.push(newGag)
       }
-      allGags.push(newGag)
-    }
     setGags(allGags)
   })}
 
@@ -33,38 +32,36 @@ function App() {
     const fd = new FormData()
     fd.append('profile', file, file.name)
     fd.append('name', name)
-    axios.post('http://localhost:3001/upload', fd)
+    axios.post('http://localhost:3001/upload', fd).then(alert('Meme uploaded succssefully'))
+    setTimeout(function() {
+      getAllImagesFromServer()
+    }, 500);
+    
   }
 
   const onLike = (gag) => {
-    let newGags = [...gags]
-    gag.likes = gag.likes+1
-    console.log(typeof(newGags))
-    for(let i=0; i<newGags.length; i++){
-      if(gag.id === newGags[i].id){
-        newGags[i] = gag
-      }
-    }
-    
-    setGags(newGags)
+    const fd = new FormData()
+    fd.append('img', gag.img)
+    axios.put('http://localhost:3001/like', {'img':gag.img})
+    setTimeout(function() {
+      getAllImagesFromServer()
+    }, 500);
   }
 
   const onDislike = (gag) => {
-    gag.likes = gag.likes-1
-    let newGags = [...gags]
-    for(let i=0; i<newGags.length; i++){
-      if(gag.id === newGags[i].id){
-        newGags[i] = gag
-      }
-    }
-    
-    setGags(newGags)
+    const fd = new FormData()
+    fd.append('img', gag.img)
+    axios.put('http://localhost:3001/dislike', {'img':gag.img})
+    setTimeout(function() {
+      getAllImagesFromServer()
+    }, 500);
   }
 
   const onOpen = (p, g) =>{
     var newWindow = window.open(p, "", "width=600,height=400,left=200,top=200")
     newWindow.document.body.innerHTML = <GagItem key={g.id} gag={g} pic={p} onOpen={onOpen}></GagItem>
   }
+
 
   return (
     <div className="App">
