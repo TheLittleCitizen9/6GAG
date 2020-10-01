@@ -6,7 +6,7 @@ function MostLikedGags(props) {
     let mostLikedGags = []
     const getMostLikedGags = function(){
         allGags.sort((a, b) => {
-            return (b.likes-b.dislikes) - (a.likes-a.dislikes)
+            return (b.votes) - (a.votes)
         })
         
         mostLikedGags = allGags.slice(0, 4)
